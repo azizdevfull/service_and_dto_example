@@ -7,7 +7,6 @@ use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Http\Resources\PostResource;
 use App\Services\PostService;
-use Illuminate\Support\Facades\Log;
 
 class PostController extends Controller
 {
@@ -30,7 +29,7 @@ class PostController extends Controller
         $data = PostDTO::toArr($request->validated());
         $this->postService->create($data);
 
-        return response()->json(['message' => 'Post created successfully'], 201);
+        return response()->api(__('post.created_success'));
     }
 
     public function update(UpdatePostRequest $request, $id)
@@ -41,7 +40,7 @@ class PostController extends Controller
 
         $this->postService->update($post, $data);
 
-        return response()->json(['message' => 'Post updated successfully']);
+        return response()->api(__('post.updated_success'));
     }
 
     public function destroy($id)
@@ -49,6 +48,6 @@ class PostController extends Controller
         $post = $this->postService->show($id);
         $this->postService->delete($post);
 
-        return response()->json(['message' => 'Post deleted successfully']);
+        return response()->api(__('post.deleted_success'));
     }
 }
