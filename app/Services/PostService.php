@@ -2,10 +2,10 @@
 
 namespace App\Services;
 
+use App\Interfaces\PostServiceInterface;
 use App\Models\Post;
-use App\DTO\PostDTO;
 
-class PostService
+class PostService implements PostServiceInterface
 {
     public function index()
     {
